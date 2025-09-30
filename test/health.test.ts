@@ -1,6 +1,5 @@
 /**
  * Health check endpoint test.
- * @packageDocumentation
  */
 
 import request from "supertest";
