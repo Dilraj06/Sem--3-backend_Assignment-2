@@ -8,10 +8,17 @@ import {
   handleGetEmployeeById,
   handleCreateEmployee,
   handleUpdateEmployee,
-  handleDeleteEmployee
+  handleDeleteEmployee,
+  handleGetEmployeesByBranch,
+  handleGetEmployeesByDepartment
 } from "../controllers/employeeController";
 
 const router = Router();
+
+
+// Additional logical routes must come before :id route
+router.get("/branch/:id", handleGetEmployeesByBranch);
+router.get("/department/:department", handleGetEmployeesByDepartment);
 
 router.get("/", handleGetAllEmployees);
 router.get("/:id", handleGetEmployeeById);
