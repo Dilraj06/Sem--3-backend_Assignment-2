@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Dilraj06/Sem--3-backend_Assignment-2#readme",
   "devDependencies": {
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
