@@ -54,4 +54,19 @@ describe("Employee API Endpoints", () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("message", "Employee deleted successfully");
   });
+
+
+ describe("Logical Endpoints", () => {
+    it("should return employees for a valid branch ID", async () => {
+      const response = await request(app).get("/api/v1/employees/branch/1");
+      expect(response.status).toBe(200);
+      expect(Array.isArray(response.body)).toBe(true);
+    });
+
+    it("should return employees for a valid department", async () => {
+      const response = await request(app).get("/api/v1/employees/department/Sales");
+      expect(response.status).toBe(200);
+      expect(Array.isArray(response.body)).toBe(true);
+    });
+  });
 });

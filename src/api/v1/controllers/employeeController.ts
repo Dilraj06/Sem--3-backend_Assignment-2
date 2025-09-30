@@ -9,11 +9,14 @@ import {
   getEmployeeById,
   createEmployee,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
+  getEmployeesByBranch,
+  getEmployeesByDepartment
 } from "../services/employeeServices";
 
 /**
  * Get all employees.
+ * @route GET /employees
  */
 export const handleGetAllEmployees = (req: Request, res: Response): void => {
   res.json(getAllEmployees());
@@ -21,6 +24,7 @@ export const handleGetAllEmployees = (req: Request, res: Response): void => {
 
 /**
  * Get employee by ID.
+ * @route GET /employees/:id
  */
 export const handleGetEmployeeById = (req: Request, res: Response): void => {
   const id = parseInt(req.params.id, 10);
@@ -34,6 +38,7 @@ export const handleGetEmployeeById = (req: Request, res: Response): void => {
 
 /**
  * Create employee.
+ *  @route POST /employees
  */
 export const handleCreateEmployee = (req: Request, res: Response): void => {
   const { name, position, department, email, phone, branchId } = req.body;
@@ -47,6 +52,7 @@ export const handleCreateEmployee = (req: Request, res: Response): void => {
 
 /**
  * Update employee.
+ * @route PUT /employees/:id
  */
 export const handleUpdateEmployee = (req: Request, res: Response): void => {
   const id = parseInt(req.params.id, 10);
@@ -70,4 +76,32 @@ export const handleDeleteEmployee = (req: Request, res: Response): void => {
   } else {
     res.json({ message: "Employee deleted successfully" });
   }
+};
+
+/**
+ * Get employees by branch ID.
+ * @route GET /employees/branch/:id
+ */
+export const handleGetEmployeesByBranch = (req: Request, res: Response): void => {
+  const branchId = parseInt(req.params.id, 10);
+  if (isNaN(branchId)) {
+    res.status(400).json({ error: "Invalid branch ID" });
+    return;
+  }
+  const results = getEmployeesByBranch(branchId);
+  res.json(results);
+};
+
+/**
+ * Get employees by department.
+ * @route GET /employees/department/:department
+ */
+export const handleGetEmployeesByDepartment = (req: Request, res: Response): void => {
+  const department = req.params.department;
+  if (!department) {
+    res.status(400).json({ error: "Missing department parameter" });
+    return;
+  }
+  const results = getEmployeesByDepartment(department);
+  res.json(results);
 };
